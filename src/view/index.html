@@ -23,7 +23,15 @@
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedinSearch">
-
+        <h1> Enter songs to search </h1>
+        <br>
+        Song1:<br>
+        <input type="text" id="song1">
+        <br>
+        Song2:<br>
+        <input type="text" id="song2">
+        <br><br>
+        <button class="btn btn-default" id="submit">Submit</button>
 
         <div id="user-profile">
         </div>
@@ -123,6 +131,24 @@
           }
 
           document.getElementById('obtain-new-token').addEventListener('click', function() {
+            $.ajax({
+              url: '/refresh_token',
+              data: {
+                'refresh_token': refresh_token
+              }
+            }).done(function(data) {
+              access_token = data.access_token;
+              oauthPlaceholder.innerHTML = oauthTemplate({
+                access_token: access_token,
+                refresh_token: refresh_token
+              });
+            });
+          }, false);
+          document.getElementById('submit').addEventListener('click', function() {
+            var song1 = document.getElementById("song1").value;
+            var song2 = document.getElementById("song2").value;
+            console.log(song1);
+            console.log("abc");
             $.ajax({
               url: '/refresh_token',
               data: {
