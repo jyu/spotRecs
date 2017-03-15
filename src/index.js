@@ -114,6 +114,9 @@ app.get('/callback', function(req, res) {
 });
 
 app.get('/search', function(req, res) {
+  res.send({
+    'access_token': 1234
+  });
 });
 
 app.get('/refresh_token', function(req, res) {

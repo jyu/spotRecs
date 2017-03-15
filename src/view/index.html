@@ -144,22 +144,18 @@
               });
             });
           }, false);
+
           document.getElementById('submit').addEventListener('click', function() {
             var song1 = document.getElementById("song1").value;
             var song2 = document.getElementById("song2").value;
-            console.log(song1);
-            console.log("abc");
             $.ajax({
-              url: '/refresh_token',
+              url: '/search',
               data: {
-                'refresh_token': refresh_token
+                'song1': song1,
+                'song2': song2
               }
             }).done(function(data) {
-              access_token = data.access_token;
-              oauthPlaceholder.innerHTML = oauthTemplate({
-                access_token: access_token,
-                refresh_token: refresh_token
-              });
+              console.log(data.access_token);
             });
           }, false);
         }
