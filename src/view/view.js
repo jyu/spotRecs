@@ -76,6 +76,7 @@
     document.getElementById('submit').addEventListener('click', function() {
       var songName = "";
       var songIDs = [];
+      console.log(songIDs);
       for (var i=1; i < num+1; i++) {
         songName = "song" + i;
         var song = document.getElementById(songName).value;
@@ -89,8 +90,12 @@
           console.log(data.preview);
           songIDs.push(data);
           console.log(songIDs);
+          if (songIDs.length == num) {
+            console.log('searching complete!');
+          }
         });
       }
+      console.log(songIDs);
     }, false);
 
     document.getElementById('addRow').addEventListener('click', function() {
