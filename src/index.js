@@ -115,7 +115,7 @@ app.get('/callback', function(req, res) {
 
 app.get('/search', function(req, res) {
   var access_token = req.query.access;
-  var song = req.query.song1
+  var song = req.query.song
   var url = 'https://api.spotify.com/v1/search?q=' +
              song.replace(/ /g, "+") +
              '&type=track'
@@ -131,7 +131,6 @@ app.get('/search', function(req, res) {
       'preview': song.preview_url
     });
   });
-  console.log('debug');
 });
 
 app.get('/refresh_token', function(req, res) {

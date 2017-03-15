@@ -23,15 +23,22 @@
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedinSearch">
-        <h1> Enter songs to search </h1>
+        <div id="search">
+          <h1> Enter songs to search </h1>
+          <br>
+          Song 1:<br>
+          <input type="text" id="song1">
+          <br>
+          Song 2:<br>
+          <input type="text" id="song2">
+          <br>
+          Song 3:<br>
+          <input type="text" id="song3">
+          <br>
+        </div>
         <br>
-        Song1:<br>
-        <input type="text" id="song1">
-        <br>
-        Song2:<br>
-        <input type="text" id="song2">
-        <br><br>
         <button class="btn btn-default" id="submit">Submit</button>
+        <button class="btn btn-default" id="addRow">Add Row</button>
 
         <div id="user-profile">
         </div>
@@ -151,12 +158,22 @@
             $.ajax({
               url: '/search',
               data: {
-                'song1': song1,
+                'song': song1,
                 'access': access_token
               }
             }).done(function(data) {
               console.log(data.preview);
             });
+          }, false);
+
+          document.getElementById('addRow').addEventListener('click', function() {
+            var content = search.innerHTML.replace(/^\s+|\s*(<br *\/?>)?\s*$/g,"");
+            var contentList = content.split(/\s*<br ?\/?>\s*/);
+            var lastSong = contentList[contentList.length - 2];
+            var num = parseInt(lastSong.charAt(lastSong.length - 2)) + 1;
+            $(search).append('Song ' + num + ': <br>');
+            $(search).append('<input type="text" id="song1">');
+            $(search).append('<br>');
           }, false);
         }
       })();
