@@ -115,7 +115,8 @@ app.get('/callback', function(req, res) {
 
 app.get('/search', function(req, res) {
   res.send({
-    'access_token': 1234
+    'song1': req.query.song1,
+    'song2': req.query.song2
   });
 });
 
