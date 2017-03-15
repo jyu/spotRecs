@@ -14,6 +14,17 @@
     return hashParams;
   }
 
+  function addRowFn() {
+    var content = search.innerHTML.replace(/^\s+|\s*(<br *\/?>)?\s*$/g,"");
+    var contentList = content.split(/\s*<br ?\/?>\s*/);
+    var lastSong = contentList[contentList.length - 2];
+    num = parseInt(lastSong.charAt(lastSong.length - 2)) + 1;
+    var newSong = "song" + num;
+    $(search).append('Song ' + num + ': <br>');
+    $(search).append('<input type="text" id=' + newSong + '>');
+    $(search).append('<br>');
+  }
+
   var userProfileSource = document.getElementById('user-profile-template').innerHTML,
       userProfileTemplate = Handlebars.compile(userProfileSource),
       userProfilePlaceholder = document.getElementById('user-profile');
@@ -35,6 +46,7 @@
   } else {
     if (access_token) {
       // render oauth info
+
       oauthPlaceholder.innerHTML = oauthTemplate({
         access_token: access_token,
         refresh_token: refresh_token
@@ -99,14 +111,7 @@
     }, false);
 
     document.getElementById('addRow').addEventListener('click', function() {
-      var content = search.innerHTML.replace(/^\s+|\s*(<br *\/?>)?\s*$/g,"");
-      var contentList = content.split(/\s*<br ?\/?>\s*/);
-      var lastSong = contentList[contentList.length - 2];
-      num = parseInt(lastSong.charAt(lastSong.length - 2)) + 1;
-      var newSong = "song" + num;
-      $(search).append('Song ' + num + ': <br>');
-      $(search).append('<input type="text" id=' + newSong + '>');
-      $(search).append('<br>');
+      addRowFn();
     }, false);
   }
 })();
