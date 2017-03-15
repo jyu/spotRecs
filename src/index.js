@@ -114,10 +114,24 @@ app.get('/callback', function(req, res) {
 });
 
 app.get('/search', function(req, res) {
-  res.send({
-    'song1': req.query.song1,
-    'song2': req.query.song2
+  var access_token = req.query.access;
+  var song = req.query.song1
+  var url = 'https://api.spotify.com/v1/search?q=' +
+             song.replace(/ /g, "+") +
+             '&type=track'
+  var options = {
+    url: url,
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true
+  };
+  request.get(options, function(error, response, body) {
+    console.log(body);
+    var song = body.tracks.items[0]
+    res.send({
+      'preview': song.preview_url
+    });
   });
+  console.log('debug');
 });
 
 app.get('/refresh_token', function(req, res) {

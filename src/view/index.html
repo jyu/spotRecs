@@ -152,11 +152,10 @@
               url: '/search',
               data: {
                 'song1': song1,
-                'song2': song2
+                'access': access_token
               }
             }).done(function(data) {
-              console.log(data.song1);
-              console.log(data.song2);
+              console.log(data.preview);
             });
           }, false);
         }
