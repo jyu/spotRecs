@@ -115,7 +115,7 @@ app.get('/callback', function(req, res) {
 
 app.get('/search', function(req, res) {
   var access_token = req.query.access;
-  var song = req.query.song
+  var song = req.query.song;
   var url = 'https://api.spotify.com/v1/search?q=' +
              song.replace(/ /g, "+") +
              '&type=track'

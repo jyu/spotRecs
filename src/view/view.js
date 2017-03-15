@@ -75,21 +75,22 @@
 
     document.getElementById('submit').addEventListener('click', function() {
       var songName = "";
-      var songs = [];
+      var songIDs = [];
       for (var i=1; i < num+1; i++) {
         songName = "song" + i;
-        songs.push(document.getElementById(songName).value);
+        var song = document.getElementById(songName).value;
+        $.ajax({
+          url: '/search',
+          data: {
+            'song': song,
+            'access': access_token
+          }
+        }).done(function(data) {
+          console.log(data.preview);
+          songIDs.push(data);
+          console.log(songIDs);
+        });
       }
-      console.log(songs);
-      $.ajax({
-        url: '/search',
-        data: {
-          'song': 'shelter',
-          'access': access_token
-        }
-      }).done(function(data) {
-        console.log(data.preview);
-      });
     }, false);
 
     document.getElementById('addRow').addEventListener('click', function() {
