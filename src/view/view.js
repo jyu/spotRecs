@@ -28,6 +28,8 @@
       refresh_token = params.refresh_token,
       error = params.error;
 
+  var num = 3;
+
   if (error) {
     alert('There was an error during the authentication');
   } else {
@@ -72,8 +74,14 @@
     }, false);
 
     document.getElementById('submit').addEventListener('click', function() {
+      var songName = "";
+      for (var i=0; i < num; i++) {
+        songName = "song" + num;
+      }
       var song1 = document.getElementById("song1").value;
       var song2 = document.getElementById("song2").value;
+      var song3 = document.getElementById("song3").value;
+      console.log(newSong);
       $.ajax({
         url: '/search',
         data: {
@@ -89,10 +97,12 @@
       var content = search.innerHTML.replace(/^\s+|\s*(<br *\/?>)?\s*$/g,"");
       var contentList = content.split(/\s*<br ?\/?>\s*/);
       var lastSong = contentList[contentList.length - 2];
-      var num = parseInt(lastSong.charAt(lastSong.length - 2)) + 1;
+      num = parseInt(lastSong.charAt(lastSong.length - 2)) + 1;
+      var newSong = "song" + num;
       $(search).append('Song ' + num + ': <br>');
-      $(search).append('<input type="text" id="song1">');
+      $(search).append('<input type="text" id=' + newSong + '>');
       $(search).append('<br>');
     }, false);
   }
 })();
+
