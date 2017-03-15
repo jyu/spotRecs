@@ -75,17 +75,16 @@
 
     document.getElementById('submit').addEventListener('click', function() {
       var songName = "";
-      for (var i=0; i < num; i++) {
-        songName = "song" + num;
+      var songs = [];
+      for (var i=1; i < num+1; i++) {
+        songName = "song" + i;
+        songs.push(document.getElementById(songName).value);
       }
-      var song1 = document.getElementById("song1").value;
-      var song2 = document.getElementById("song2").value;
-      var song3 = document.getElementById("song3").value;
-      console.log(newSong);
+      console.log(songs);
       $.ajax({
         url: '/search',
         data: {
-          'song': song1,
+          'song': 'shelter',
           'access': access_token
         }
       }).done(function(data) {
