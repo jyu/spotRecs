@@ -125,7 +125,6 @@ app.get('/search', function(req, res) {
     json: true
   };
   request.get(options, function(error, response, body) {
-    console.log(body);
     var song = body.tracks.items[0]
     res.send({
       'song': song,
@@ -149,7 +148,7 @@ app.get('/recs', function(req, res) {
   };
   request.get(options, function(error, response, body) {
     console.log(body);
-    var song = body.tracks.items[0]
+    var song = body.tracks[0]
     res.send({
       'song': song,
       'preview': song.preview_url

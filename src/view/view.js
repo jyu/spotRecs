@@ -33,6 +33,7 @@
         'access': access_token
       }
     }).done(function(data) {
+      console.log(data.song.name);
       console.log(data.preview);
     });
   }
