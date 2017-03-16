@@ -25,6 +25,18 @@
     $(search).append('<br>');
   }
 
+  function getRecs(songIDs) {
+    $.ajax({
+      url: '/recs',
+      data: {
+        'songs': songIDs,
+        'access': access_token
+      }
+    }).done(function(data) {
+      console.log(data.preview);
+    });
+  }
+
   var userProfileSource = document.getElementById('user-profile-template').innerHTML,
       userProfileTemplate = Handlebars.compile(userProfileSource),
       userProfilePlaceholder = document.getElementById('user-profile');
@@ -100,10 +112,11 @@
           }
         }).done(function(data) {
           console.log(data.preview);
-          songIDs.push(data);
+          songIDs.push(data.song);
           console.log(songIDs);
           if (songIDs.length == num) {
             console.log('searching complete!');
+            getRecs(songIDs);
           }
         });
       }

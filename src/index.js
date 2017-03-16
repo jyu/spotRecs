@@ -128,10 +128,35 @@ app.get('/search', function(req, res) {
     console.log(body);
     var song = body.tracks.items[0]
     res.send({
+      'song': song,
       'preview': song.preview_url
     });
   });
 });
+
+app.get('/recs', function(req, res) {
+  var access_token = req.query.access;
+  var songs = req.query.songs;
+  var url = 'https://api.spotify.com/v1/recommendations?seed_tracks=';
+  for (var i = 0; i < songs.length; i++) {
+    url += songs[i].id + ",";
+  }
+
+  var options = {
+    url: url,
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true
+  };
+  request.get(options, function(error, response, body) {
+    console.log(body);
+    var song = body.tracks.items[0]
+    res.send({
+      'song': song,
+      'preview': song.preview_url
+    });
+  });
+});
+
 
 app.get('/refresh_token', function(req, res) {
 
