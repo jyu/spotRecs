@@ -44,6 +44,36 @@
     });
   }
 
+  function searchSong(num, i, songIDs) {
+    songName = "song" + i;
+    console.log(songName);
+    var song = document.getElementById(songName).value;
+    $.ajax({
+      url: '/search',
+      data: {
+        'song': song,
+        'access': access_token
+      }
+    }).done(function(data) {
+      console.log(data.preview);
+      songIDs.push(data.song);
+      console.log(songIDs);
+      if (songIDs.length == num) {
+        console.log('searching complete!');
+        getRecs(songIDs);
+      }
+    });
+  }
+
+  function searchAll(num) {
+    var songName = "";
+    var songIDs = [];
+    console.log(songIDs);
+    for (var i=1; i < num+1; i++) {
+      searchSong(num, i, songIDs);
+    }
+  }
+
   var userProfileSource = document.getElementById('user-profile-template').innerHTML,
       userProfileTemplate = Handlebars.compile(userProfileSource),
       userProfilePlaceholder = document.getElementById('user-profile');
@@ -105,29 +135,7 @@
     }, false);
 
     document.getElementById('submit').addEventListener('click', function() {
-      var songName = "";
-      var songIDs = [];
-      console.log(songIDs);
-      for (var i=1; i < num+1; i++) {
-        songName = "song" + i;
-        var song = document.getElementById(songName).value;
-        $.ajax({
-          url: '/search',
-          data: {
-            'song': song,
-            'access': access_token
-          }
-        }).done(function(data) {
-          console.log(data.preview);
-          songIDs.push(data.song);
-          console.log(songIDs);
-          if (songIDs.length == num) {
-            console.log('searching complete!');
-            getRecs(songIDs);
-          }
-        });
-      }
-      console.log(songIDs);
+      searchAll(num);
     }, false);
 
     document.getElementById('addRow').addEventListener('click', function() {
