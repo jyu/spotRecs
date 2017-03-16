@@ -140,7 +140,7 @@ app.get('/recs', function(req, res) {
   for (var i = 0; i < songs.length; i++) {
     url += songs[i].id + ",";
   }
-
+  console.log(url);
   var options = {
     url: url,
     headers: { 'Authorization': 'Bearer ' + access_token },
