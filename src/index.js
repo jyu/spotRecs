@@ -148,10 +148,9 @@ app.get('/recs', function(req, res) {
   };
   request.get(options, function(error, response, body) {
     console.log(body);
-    var song = body.tracks[0]
+    var songs = body.tracks;
     res.send({
-      'song': song,
-      'preview': song.preview_url
+      'songs': songs
     });
   });
 });
