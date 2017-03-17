@@ -1,7 +1,14 @@
 #login, #loggedinSearch
 {
     display: none;
+    padding: 30px;
 }
+
+#loggedinSearch
+{
+    font-size: 15px;
+}
+
 .text-overflow
 {
     overflow: hidden;
