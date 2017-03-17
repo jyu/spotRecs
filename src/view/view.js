@@ -41,9 +41,9 @@
       }
       var playSong = data.songs[0].preview_url;
 
-      $(search).append((data.songs[0]).name);
-      $(search).append('<audio src =' + playSong + ' controls </audio>');
-      $(search).append('<br>');
+      $(results).append((data.songs[0]).name);
+      $(results).append('<audio src =' + playSong + ' controls </audio>');
+      $(results).append('<br>');
     });
   }
 
