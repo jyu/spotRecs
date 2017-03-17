@@ -61,6 +61,7 @@
             song4Artist:data.songs[3].artists[0].name,
           });
           $('#results').show();
+          $('#container').show();
         }
       });
     }
@@ -136,6 +137,8 @@
             $('#loggedinSearch').show();
             $('#user-profile').hide();
             $('#searching').hide();
+            $('#container').hide();
+
           }
       });
     } else {
