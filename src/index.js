@@ -147,7 +147,6 @@ app.get('/recs', function(req, res) {
     json: true
   };
   request.get(options, function(error, response, body) {
-    console.log(body);
     var songs = body.tracks;
     res.send({
       'songs': songs

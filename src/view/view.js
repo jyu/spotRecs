@@ -39,8 +39,11 @@
         console.log(song.name);
         console.log(song.preview_url);
       }
-      var playSong = data.songs[0].preview_url
+      var playSong = data.songs[0].preview_url;
+
+      $(search).append((data.songs[0]).name);
       $(search).append('<audio src =' + playSong + ' controls </audio>');
+      $(search).append('<br>');
     });
   }
 
@@ -111,6 +114,8 @@
 
             $('#login').hide();
             $('#loggedinSearch').show();
+            $('#user-profile').hide();
+            $('#oauth').hide();
           }
       });
     } else {
@@ -119,20 +124,20 @@
         $('#loggedinSearch').hide();
     }
 
-    document.getElementById('obtain-new-token').addEventListener('click', function() {
-      $.ajax({
-        url: '/refresh_token',
-        data: {
-          'refresh_token': refresh_token
-        }
-      }).done(function(data) {
-        access_token = data.access_token;
-        oauthPlaceholder.innerHTML = oauthTemplate({
-          access_token: access_token,
-          refresh_token: refresh_token
-        });
-      });
-    }, false);
+    // document.getElementById('obtain-new-token').addEventListener('click', function() {
+    //   $.ajax({
+    //     url: '/refresh_token',
+    //     data: {
+    //       'refresh_token': refresh_token
+    //     }
+    //   }).done(function(data) {
+    //     access_token = data.access_token;
+    //     oauthPlaceholder.innerHTML = oauthTemplate({
+    //       access_token: access_token,
+    //       refresh_token: refresh_token
+    //     });
+    //   });
+    // }, false);
 
     document.getElementById('submit').addEventListener('click', function() {
       searchAll(num);
