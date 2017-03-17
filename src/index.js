@@ -141,6 +141,7 @@ app.get('/search', function(req, res) {
 });
 
 app.get('/recs', function(req, res) {
+  // if req.query.songs != null
   var access_token = req.query.access;
   var songs = req.query.songs;
   var url = 'https://api.spotify.com/v1/recommendations?seed_tracks=';
