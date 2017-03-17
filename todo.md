@@ -2,7 +2,7 @@
 an actual UI
 error checker for inputs
 song previewer
-export to playlist
+import/export to playlist
 song analysis
 add artists recs
 

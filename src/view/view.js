@@ -58,10 +58,14 @@
         'access': access_token
       }
     }).done(function(data) {
-      console.log(data.preview);
-      songIDs.push(data.song);
-      console.log(songIDs);
-      if (songIDs.length == num) {
+      if (data.song == 'error') {
+        num[0] -= 1;
+      } else {
+        console.log(data.preview);
+        songIDs.push(data.song);
+        console.log(songIDs);
+      }
+      if (songIDs.length == num[0]) {
         console.log('searching complete!');
         getRecs(songIDs);
       }
@@ -91,7 +95,7 @@
       refresh_token = params.refresh_token,
       error = params.error;
 
-  var num = 3;
+  var num = [3];
 
   if (error) {
     alert('There was an error during the authentication');

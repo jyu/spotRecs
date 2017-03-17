@@ -125,11 +125,18 @@ app.get('/search', function(req, res) {
     json: true
   };
   request.get(options, function(error, response, body) {
-    var song = body.tracks.items[0]
-    res.send({
-      'song': song,
-      'preview': song.preview_url
-    });
+    if (!error && response.statusCode === 200) {
+      var song = body.tracks.items[0]
+      res.send({
+        'song': song,
+        'preview': song.preview_url
+      });
+    } else {
+      res.send({
+        'song': 'error',
+        'preview': 'error'
+      });
+    }
   });
 });
 
