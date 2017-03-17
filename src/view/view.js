@@ -14,13 +14,13 @@
     return hashParams;
   }
 
-  function addRowFn() {
+  function addRowFn(num) {
     var content = search.innerHTML.replace(/^\s+|\s*(<br *\/?>)?\s*$/g,"");
     var contentList = content.split(/\s*<br ?\/?>\s*/);
     var lastSong = contentList[contentList.length - 2];
-    num = parseInt(lastSong.charAt(lastSong.length - 2)) + 1;
-    var newSong = "song" + num;
-    $(search).append('Song ' + num + ': <br>');
+    num = [parseInt(lastSong.charAt(lastSong.length - 2)) + 1];
+    var newSong = "song" + num[0];
+    $(search).append('Song ' + num[0] + ': <br>');
     $(search).append('<input type="text" id=' + newSong + '>');
     $(search).append('<br>');
   }
@@ -76,7 +76,7 @@
     var songName = "";
     var songIDs = [];
     console.log(songIDs);
-    for (var i=1; i < num+1; i++) {
+    for (var i=1; i < num[0]+1; i++) {
       searchSong(num, i, songIDs);
     }
   }
@@ -95,7 +95,7 @@
       refresh_token = params.refresh_token,
       error = params.error;
 
-  var num = [3];
+  var num = [3]; // keeps track of how many songs
 
   if (error) {
     alert('There was an error during the authentication');
@@ -148,7 +148,7 @@
     }, false);
 
     document.getElementById('addRow').addEventListener('click', function() {
-      addRowFn();
+      addRowFn(num);
     }, false);
   }
 })();
