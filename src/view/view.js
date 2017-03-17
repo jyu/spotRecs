@@ -108,10 +108,6 @@
       userProfileTemplate = Handlebars.compile(userProfileSource),
       userProfilePlaceholder = document.getElementById('user-profile');
 
-  var oauthSource = document.getElementById('oauth-template').innerHTML,
-      oauthTemplate = Handlebars.compile(oauthSource),
-      oauthPlaceholder = document.getElementById('oauth');
-
   var resultsSource = document.getElementById('results-template').innerHTML,
       resultsTemplate = Handlebars.compile(resultsSource),
       resultsPlaceholder = document.getElementById('results');
@@ -128,14 +124,7 @@
     alert('There was an error during the authentication');
   } else {
     if (access_token) {
-      // render oauth info
-
-      oauthPlaceholder.innerHTML = oauthTemplate({
-        access_token: access_token,
-        refresh_token: refresh_token
-      });
-
-      $.ajax({
+        $.ajax({
           url: 'https://api.spotify.com/v1/me',
           headers: {
             'Authorization': 'Bearer ' + access_token
@@ -146,7 +135,6 @@
             $('#login').hide();
             $('#loggedinSearch').show();
             $('#user-profile').hide();
-            $('#oauth').hide();
             $('#searching').hide();
           }
       });
