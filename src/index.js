@@ -1,7 +1,7 @@
 /**
 *   Based on Spotify authoritization guide
  */
-// Express.Js, Request, Jquery, Handlebars, Ajax
+// Express.Js, Request, Jquery, Handlebars
 
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
