@@ -55,6 +55,9 @@
           song3: data.songs[2].name,
           song3Link: data.songs[2].preview_url,
           song3Artist:data.songs[2].artists[0].name,
+          song4: data.songs[3].name,
+          song4Link: data.songs[3].preview_url,
+          song4Artist:data.songs[3].artists[0].name,
         });
         $('#searching').hide();
         $('#results').show();
