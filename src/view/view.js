@@ -34,14 +34,19 @@
       }
     }).done(function(data) {
       console.log(data.songs.length);
-      for (var i = 0; i < data.songs.length; i++) {
-        var song = data.songs[i];
-      }
-      var playSong = data.songs[0].preview_url;
-
-      $(results).append((data.songs[0]).name);
-      $(results).append('<audio src =' + playSong + ' controls </audio>');
-      $(results).append('<br>');
+      resultsPlaceholder.innerHTML = resultsTemplate(
+      {
+        song1: data.songs[0].name,
+        song1Link: data.songs[0].preview_url,
+        song1Artist:data.songs[0].artists[0].name,
+        song2: data.songs[1].name,
+        song2Link: data.songs[1].preview_url,
+        song2Artist:data.songs[1].artists[0].name,
+        song3: data.songs[2].name,
+        song3Link: data.songs[2].preview_url,
+        song3Artist:data.songs[2].artists[0].name,
+      });
+      $('#results').show();
     });
   }
 
@@ -86,6 +91,10 @@
   var oauthSource = document.getElementById('oauth-template').innerHTML,
       oauthTemplate = Handlebars.compile(oauthSource),
       oauthPlaceholder = document.getElementById('oauth');
+
+  var resultsSource = document.getElementById('results-template').innerHTML,
+      resultsTemplate = Handlebars.compile(resultsSource),
+      resultsPlaceholder = document.getElementById('results');
 
   var params = getHashParams();
 

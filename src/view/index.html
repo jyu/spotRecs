@@ -43,6 +43,31 @@
 
     <script id="results-template" type="text/x-handlebars-template">
       <h1> Recommended Songs </h1>
+      <table class="table">
+        <thread>
+          <tr>
+            <th>Name</th>
+            <th>Artist</th>
+            <th>Preview</th>
+          </tr>
+        </thread>
+        <tbody>
+        <tr>
+          <td>{{song1}}</td>
+          <td>{{song1Artist}} </td>
+          <td><audio src = {{song1Link}} controls ></audio></td>
+        </tr>
+        <tr>
+          <td>{{song2}}</td>
+          <td>{{song2Artist}} </td>
+          <td><audio src = {{song2Link}} controls ></audio></td>
+        </tr>
+        <tr>
+          <td>{{song3}}</td>
+          <td>{{song3Artist}} </td>
+          <td><audio src = {{song3Link}} controls ></audio></td>
+        </tr>
+      </div>
     </script>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
