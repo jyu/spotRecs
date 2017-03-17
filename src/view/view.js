@@ -46,6 +46,7 @@
         song3Link: data.songs[2].preview_url,
         song3Artist:data.songs[2].artists[0].name,
       });
+      $('#searching').hide();
       $('#results').show();
     });
   }
@@ -76,6 +77,7 @@
   }
 
   function searchAll(num) {
+    $('#searching').show();
     var songName = "";
     var songIDs = [];
     console.log(songIDs);
@@ -127,6 +129,7 @@
             $('#loggedinSearch').show();
             $('#user-profile').hide();
             $('#oauth').hide();
+            $('#searching').hide();
           }
       });
     } else {
