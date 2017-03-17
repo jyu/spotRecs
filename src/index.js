@@ -166,4 +166,51 @@ app.get('/recs', function(req, res) {
   });
 });
 
+app.get('/stats', function(req, res) {
+  console.log('getting stats');
+  var access_token = req.query.access;
+  var song = req.query.song;
+  var key = req.query.key;
+  console.log(song);
+  var url = 'https://api.spotify.com/v1/audio-features/' + song;
+  var options = {
+    url: url,
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true
+  };
+  request.get(options, function(error, response, body) {
+    console.log(body);
+    if (!error && response.statusCode === 200) {
+      console.log('sending back');
+      // Adjust stats to from 0-10
+      res.send({
+        'key': key,
+        'stats': {
+          'key': key,
+          'd': (body.danceability * 10).toFixed(2),
+          'e': (body.energy * 10).toFixed(2),
+          'a': (body.acousticness * 10).toFixed(2),
+          'i': (body.instrumentalness * 10).toFixed(2),
+          'v': (body.valence * 10).toFixed(2),
+          't': (body.tempo / 20).toFixed(2)
+        }
+      });
+    } else {
+      console.log(error);
+      console.log('error');
+      res.send({
+        'key': 'error',
+        'stats': {
+          'd': 'error',
+          'e': 'error',
+          'a': 'error',
+          'i': 'error',
+          'v': 'error',
+          't': 'error'
+        }
+      });
+    }
+  });
+});
+
 app.listen(process.env.PORT || 3000);
