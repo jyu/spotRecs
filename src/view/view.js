@@ -43,27 +43,29 @@
           'access': access_token
         }
       }).done(function(data) {
-        console.log(data.songs.length);
-        resultsPlaceholder.innerHTML = resultsTemplate(
-        {
-          song1: data.songs[0].name,
-          song1Link: data.songs[0].preview_url,
-          song1Artist:data.songs[0].artists[0].name,
-          song2: data.songs[1].name,
-          song2Link: data.songs[1].preview_url,
-          song2Artist:data.songs[1].artists[0].name,
-          song3: data.songs[2].name,
-          song3Link: data.songs[2].preview_url,
-          song3Artist:data.songs[2].artists[0].name,
-          song4: data.songs[3].name,
-          song4Link: data.songs[3].preview_url,
-          song4Artist:data.songs[3].artists[0].name,
-        });
-        $('#searching').hide();
-        $('#results').show();
+        if (data.songs != 'error') {
+          console.log(data.songs.length);
+          resultsPlaceholder.innerHTML = resultsTemplate(
+          {
+            song1: data.songs[0].name,
+            song1Link: data.songs[0].preview_url,
+            song1Artist:data.songs[0].artists[0].name,
+            song2: data.songs[1].name,
+            song2Link: data.songs[1].preview_url,
+            song2Artist:data.songs[1].artists[0].name,
+            song3: data.songs[2].name,
+            song3Link: data.songs[2].preview_url,
+            song3Artist:data.songs[2].artists[0].name,
+            song4: data.songs[3].name,
+            song4Link: data.songs[3].preview_url,
+            song4Artist:data.songs[3].artists[0].name,
+          });
+          $('#results').show();
+        }
       });
     }
     $('#searching').hide();
+    $('html, body').animate({scrollTop:$(document).height()}, 'slow');
   }
 
   function searchSong(num, i, songIDs) {
