@@ -34,17 +34,71 @@
     $(search).append('<br>');
   }
 
-  function getStats(songIDs) {
+  function getStats(songIDs, songNames) {
+    console.log('getting stats');
     if(typeof songIDs != 'undefined' && songIDs.length != 0) {
-      $.ajax({
-        url: '/getStats',
-        data: {
-          'songs': songIDs,
-          'access': access_token
-        }
-      }).done(function(data) {
+      var statistics = [0,0,0,0];
+      var count = 0;
+      for (var i=0; i < songIDs.length; i++) {
+        console.log(count);
+        console.log('song ' + i);
+        var song = songIDs[i];
+        $.ajax({
+          url: '/stats',
+          data: {
+            'song': song,
+            'access': access_token,
+            'key': i
+          }
+        }).done(function(data) {
+          if (data.key != 'error') {
+            console.log(statistics);
+            console.log(data.stats.key);
+            statistics.splice(data.stats.key,1,data.stats);
+            console.log(statistics[i]);
+            count += 1;
+          }
+          if (count == 4) {
+            console.log('Analysis done');
 
-      })
+            var stats1 = statistics[0];
+            var stats2 = statistics[1];
+            var stats3 = statistics[2];
+            var stats4 = statistics[3];
+            dataPlaceholder.innerHTML = dataTemplate(
+            {
+              song1: songNames[0],
+              song1D: stats1.d,
+              song1E: stats1.e,
+              song1A: stats1.a,
+              song1I: stats1.i,
+              song1V: stats1.v,
+              song1T: stats1.t,
+              song2: songNames[1],
+              song2D: stats2.d,
+              song2E: stats2.e,
+              song2A: stats2.a,
+              song2I: stats2.i,
+              song2V: stats2.v,
+              song2T: stats2.t,
+              song3: songNames[2],
+              song3D: stats3.d,
+              song3E: stats3.e,
+              song3A: stats3.a,
+              song3I: stats3.i,
+              song3V: stats3.v,
+              song3T: stats3.t,
+              song4: songNames[3],
+              song4D: stats4.d,
+              song4E: stats4.e,
+              song4A: stats4.a,
+              song4I: stats4.i,
+              song4V: stats4.v,
+              song4T: stats4.t
+            });
+          }
+        })
+      }
     }
   }
 
