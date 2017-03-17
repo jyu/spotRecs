@@ -34,6 +34,20 @@
     $(search).append('<br>');
   }
 
+  function getStats(songIDs) {
+    if(typeof songIDs != 'undefined' && songIDs.length != 0) {
+      $.ajax({
+        url: '/getStats',
+        data: {
+          'songs': songIDs,
+          'access': access_token
+        }
+      }).done(function(data) {
+
+      })
+    }
+  }
+
   function getRecs(songIDs) {
     if(typeof songIDs != 'undefined' && songIDs.length != 0) {
       $.ajax({
@@ -60,6 +74,13 @@
             song4Link: data.songs[3].preview_url,
             song4Artist:data.songs[3].artists[0].name,
           });
+          resultIDs = [
+            data.songs[0].id,
+            data.songs[1].id,
+            data.songs[2].id,
+            data.songs[3].id
+          ]
+          getStats(resultIDs);
           $('#results').show();
           $('#container').show();
         }
@@ -112,6 +133,10 @@
   var resultsSource = document.getElementById('results-template').innerHTML,
       resultsTemplate = Handlebars.compile(resultsSource),
       resultsPlaceholder = document.getElementById('results');
+
+  var dataSource = document.getElementById('data-template').innerHTML,
+      dataTemplate = Handlebars.compile(dataSource),
+      dataPlaceholder = document.getElementById('song-data');
 
   var params = getHashParams();
 

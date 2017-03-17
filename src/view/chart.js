@@ -1,61 +1,61 @@
 Highcharts.chart('container', {
+
     chart: {
-        type: 'bar'
+        type: 'column'
     },
     title: {
-        text: 'Historic World Population by Region'
+        text: 'Song Analysis'
     },
     subtitle: {
-        text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+        text: 'Source: Spotify API'
     },
     xAxis: {
-        categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
-        title: {
-            text: null
-        }
+        categories: [
+            'Danceability',
+            'Energy',
+            'Acousticness',
+            'Instrumentalness',
+            'Liveness',
+            'Valence',
+            'Tempo'
+        ],
+        crosshair: true
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Population (millions)',
-            align: 'high'
-        },
-        labels: {
-            overflow: 'justify'
+            text: 'Value'
         }
     },
     tooltip: {
-        valueSuffix: ' millions'
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
     },
     plotOptions: {
-        bar: {
-            dataLabels: {
-                enabled: true
-            }
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
         }
     },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: 80,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-        shadow: true
-    },
-    credits: {
-        enabled: false
-    },
     series: [{
-        name: 'Year 1800',
-        data: [107, 31, 635, 203, 2]
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
+
     }, {
-        name: 'Year 1900',
-        data: [133, 156, 947, 408, 6]
+        name: 'New York',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
+
     }, {
-        name: 'Year 2012',
-        data: [1052, 954, 4250, 740, 38]
+        name: 'London',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0]
+
+    }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4]
+
     }]
 });

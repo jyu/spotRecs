@@ -40,10 +40,77 @@
         </div>
         <div id="user-profile">
         </div>
-        <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto">
+        <div id="song-data">
+        </div>
+        <div id="container" style="min-width: 500px; max-width: 800px; height: 400px; margin: 0 auto">
         </div>
       </div>
     </div>
+
+    <script id ="data-template" type ="text/x-handlebars-template">
+      <table id="datatable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{{song1}}</th>
+                <th>{{song2}}</th>
+                <th>{{song3}}</th>
+                <th>{{song4}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Danceability</th>
+                <td>{{song1D}}</td>
+                <td>{{song2D}}</td>
+                <td>{{song3D}}</td>
+                <td>{{song4D}}</td>
+            </tr>
+            <tr>
+                <th>Energy</th>
+                <td>{{song1E}}</td>
+                <td>{{song2E}}</td>
+                <td>{{song3E}}</td>
+                <td>{{song4E}}</td>
+            </tr>
+            <tr>
+                <th>Acousticness</th>
+                <td>{{song1A}}</td>
+                <td>{{song2A}}</td>
+                <td>{{song3A}}</td>
+                <td>{{song4A}}</td>
+            </tr>
+            <tr>
+                <th>Instrumentalness</th>
+                <td>{{song1I}}</td>
+                <td>{{song2I}}</td>
+                <td>{{song3I}}</td>
+                <td>{{song4I}}</td>
+            </tr>
+            <tr>
+                <th>Liveness</th>
+                <td>{{song1I}}</td>
+                <td>{{song2I}}</td>
+                <td>{{song3I}}</td>
+                <td>{{song4I}}</td>
+            </tr>
+            <tr>
+                <th>Valence</th>
+                <td>{{song1V}}</td>
+                <td>{{song2V}}</td>
+                <td>{{song3V}}</td>
+                <td>{{song4V}}</td>
+            </tr>
+            <tr>
+                <th>Tempo</th>
+                <td>{{song1T}}</td>
+                <td>{{song2T}}</td>
+                <td>{{song3T}}</td>
+                <td>{{song4T}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </script>
 
     <script id="results-template" type="text/x-handlebars-template">
       <h1> Recommended Songs </h1>
