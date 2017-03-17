@@ -4,11 +4,13 @@
     <title>SpotRecs</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="view.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 
   <body>
     <div class="container">
       <div id="login">
-        <h1>SpotRecs: Recommendations with Spotify</h1>
+        <h1>SpotRecs: Recommendations with Spotify</h1> <br>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedinSearch">
@@ -37,6 +39,10 @@
 <!--         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>-->
       </div>
     </div>
+
+    <script id="results-template" type="text/x-handlebars-template">
+      <h1> Recommended Songs </h1>
+    </script>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
       <h1>Logged in as {{display_name}}</h1>

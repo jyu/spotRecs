@@ -36,8 +36,6 @@
       console.log(data.songs.length);
       for (var i = 0; i < data.songs.length; i++) {
         var song = data.songs[i];
-        console.log(song.name);
-        console.log(song.preview_url);
       }
       var playSong = data.songs[0].preview_url;
 
