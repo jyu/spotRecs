@@ -145,7 +145,7 @@ app.get('/recs', function(req, res) {
   var songs = req.query.songs;
   var url = 'https://api.spotify.com/v1/recommendations?seed_tracks=';
   for (var i = 0; i < songs.length; i++) {
-    url += songs[i].id + ",";
+    url += songs[i] + ",";
   }
   console.log(url);
   var options = {
