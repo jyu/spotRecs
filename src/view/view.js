@@ -14,6 +14,15 @@
     return hashParams;
   }
 
+  function updateNum(num) {
+    var content = search.innerHTML.replace(/^\s+|\s*(<br *\/?>)?\s*$/g,"");
+    var contentList = content.split(/\s*<br ?\/?>\s*/);
+    var lastSong = contentList[contentList.length - 2];
+    num = [parseInt(lastSong.charAt(lastSong.length - 2))];
+    console.log(num);
+    return num;
+  }
+
   function addRowFn(num) {
     var content = search.innerHTML.replace(/^\s+|\s*(<br *\/?>)?\s*$/g,"");
     var contentList = content.split(/\s*<br ?\/?>\s*/);
@@ -80,6 +89,7 @@
     $('#searching').show();
     var songName = "";
     var songIDs = [];
+    num = updateNum(num);
     console.log(songIDs);
     for (var i=1; i < num[0]+1; i++) {
       searchSong(num, i, songIDs);
