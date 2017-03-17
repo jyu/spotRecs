@@ -134,8 +134,15 @@
             data.songs[2].id,
             data.songs[3].id
           ]
-          getStats(resultIDs);
+          songNames = [
+            data.songs[0].name,
+            data.songs[1].name,
+            data.songs[2].name,
+            data.songs[3].name
+          ]
+          getStats(resultIDs, songNames);
           $('#results').show();
+          $('#song-data').show();
           $('#container').show();
         }
       });
@@ -160,7 +167,6 @@
       } else {
         console.log(data.preview);
         songIDs.push(data.song.id);
-        console.log(songIDs);
       }
       if (songIDs.length == num[0]) {
         console.log('searching complete!');
