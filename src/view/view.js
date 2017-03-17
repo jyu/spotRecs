@@ -30,34 +30,37 @@
     num = [parseInt(lastSong.charAt(lastSong.length - 2)) + 1];
     var newSong = "song" + num[0];
     $(search).append('Song ' + num[0] + ': <br>');
-    $(search).append('<input type="text" id=' + newSong + '>');
+    $(search).append('<input type="text" id=' + newSong + ' size = 35>');
     $(search).append('<br>');
   }
 
   function getRecs(songIDs) {
-    $.ajax({
-      url: '/recs',
-      data: {
-        'songs': songIDs,
-        'access': access_token
-      }
-    }).done(function(data) {
-      console.log(data.songs.length);
-      resultsPlaceholder.innerHTML = resultsTemplate(
-      {
-        song1: data.songs[0].name,
-        song1Link: data.songs[0].preview_url,
-        song1Artist:data.songs[0].artists[0].name,
-        song2: data.songs[1].name,
-        song2Link: data.songs[1].preview_url,
-        song2Artist:data.songs[1].artists[0].name,
-        song3: data.songs[2].name,
-        song3Link: data.songs[2].preview_url,
-        song3Artist:data.songs[2].artists[0].name,
+    if(typeof songIDs != 'undefined' && songIDs.length != 0) {
+      $.ajax({
+        url: '/recs',
+        data: {
+          'songs': songIDs,
+          'access': access_token
+        }
+      }).done(function(data) {
+        console.log(data.songs.length);
+        resultsPlaceholder.innerHTML = resultsTemplate(
+        {
+          song1: data.songs[0].name,
+          song1Link: data.songs[0].preview_url,
+          song1Artist:data.songs[0].artists[0].name,
+          song2: data.songs[1].name,
+          song2Link: data.songs[1].preview_url,
+          song2Artist:data.songs[1].artists[0].name,
+          song3: data.songs[2].name,
+          song3Link: data.songs[2].preview_url,
+          song3Artist:data.songs[2].artists[0].name,
+        });
+        $('#searching').hide();
+        $('#results').show();
       });
-      $('#searching').hide();
-      $('#results').show();
-    });
+    }
+    $('#searching').hide();
   }
 
   function searchSong(num, i, songIDs) {
