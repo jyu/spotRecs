@@ -1,1 +1,2 @@
-# spotRecs Recommendations for Spotify
+# spotRecs   
+Recommendations for Spotify
