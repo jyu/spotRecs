@@ -124,8 +124,8 @@ app.get('/search', function(req, res) {
     json: true
   };
   request.get(options, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      var song = body.tracks.items[0]
+    if (!error && response.statusCode === 200 && body.tracks.total != 0) {
+      var song = body.tracks.items[0];
       res.send({
         'song': song,
         'preview': song.preview_url
