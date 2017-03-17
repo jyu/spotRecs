@@ -94,7 +94,6 @@ app.get('/callback', function(req, res) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
-          console.log(body);
         });
 
         // we can also pass the token to the browser to make requests from there
@@ -141,14 +140,12 @@ app.get('/search', function(req, res) {
 });
 
 app.get('/recs', function(req, res) {
-  // if req.query.songs != null
   var access_token = req.query.access;
   var songs = req.query.songs;
   var url = 'https://api.spotify.com/v1/recommendations?seed_tracks=';
   for (var i = 0; i < songs.length; i++) {
     url += songs[i] + ",";
   }
-  console.log(url);
   var options = {
     url: url,
     headers: { 'Authorization': 'Bearer ' + access_token },
