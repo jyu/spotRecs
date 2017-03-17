@@ -62,7 +62,7 @@
         num[0] -= 1;
       } else {
         console.log(data.preview);
-        songIDs.push(data.song);
+        songIDs.push(data.song.id);
         console.log(songIDs);
       }
       if (songIDs.length == num[0]) {
