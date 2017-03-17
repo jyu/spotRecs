@@ -1,7 +1,7 @@
 /**
 *   Based on Spotify authoritization guide
  */
-// Spotify rest api, Express.Js, Request, Jquery, Handlebars
+// Spotify rest api,  Express.Js, Request, Jquery, Handlebars
 
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
@@ -186,5 +186,4 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+app.listen(process.env.PORT || 3000);
