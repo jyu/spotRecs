@@ -190,7 +190,6 @@ app.get('/stats', function(req, res) {
           'd': (body.danceability * 10).toFixed(2),
           'e': (body.energy * 10).toFixed(2),
           'a': (body.acousticness * 10).toFixed(2),
-          'i': (body.instrumentalness * 10).toFixed(2),
           'v': (body.valence * 10).toFixed(2),
           't': (body.tempo / 20).toFixed(2)
         }
@@ -204,7 +203,6 @@ app.get('/stats', function(req, res) {
           'd': 'error',
           'e': 'error',
           'a': 'error',
-          'i': 'error',
           'v': 'error',
           't': 'error'
         }

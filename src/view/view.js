@@ -71,31 +71,28 @@
               song1D: stats1.d,
               song1E: stats1.e,
               song1A: stats1.a,
-              song1I: stats1.i,
               song1V: stats1.v,
               song1T: stats1.t,
               song2: songNames[1],
               song2D: stats2.d,
               song2E: stats2.e,
               song2A: stats2.a,
-              song2I: stats2.i,
               song2V: stats2.v,
               song2T: stats2.t,
               song3: songNames[2],
               song3D: stats3.d,
               song3E: stats3.e,
               song3A: stats3.a,
-              song3I: stats3.i,
               song3V: stats3.v,
               song3T: stats3.t,
               song4: songNames[3],
               song4D: stats4.d,
               song4E: stats4.e,
               song4A: stats4.a,
-              song4I: stats4.i,
               song4V: stats4.v,
               song4T: stats4.t
             });
+            $(datatable).hide();
             var chart  = Highcharts.chart('container1',{
               data: {
                   table: 'datatable'
