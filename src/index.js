@@ -190,8 +190,6 @@ app.get('/stats', function(req, res) {
         }
       });
     } else {
-      console.log(error);
-      console.log('error');
       res.send({
         'key': 'error',
         'stats': {
