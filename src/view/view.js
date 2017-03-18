@@ -92,6 +92,7 @@
               song4V: stats4.v,
               song4T: stats4.t
             });
+          $('#analysis').show();
             $('#datatable').hide();
             var chart  = Highcharts.chart('analysis',{
               data: {
@@ -116,9 +117,9 @@
                   }
               }
             });
-          $('#analysis').show();
           $('#analysisHeader').show();
           $('#analysisBtn').show();
+
           $('html, body').animate({scrollTop:$(document).height()}, 'slow');
           document.getElementById('analysisButton').addEventListener('click', function() {
             $('html, body').animate({scrollTop:$(document)}, 'slow');
@@ -206,7 +207,6 @@
   }
 
   function searchAll(num) {
-    $('#container1').hide();
     $('#analysis').hide();
     $('#analysisHeader').hide();
     $('#analysisBtn').hide();
@@ -257,7 +257,6 @@
             $('#loggedinSearch').show();
             $('#user-profile').hide();
             $('#searching').hide();
-            $('#container1').hide();
             $('#resultsBtn').hide();
             $('#analysis').hide();
             $('#analysisHeader').hide();
