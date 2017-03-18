@@ -206,6 +206,11 @@
   }
 
   function searchAll(num) {
+    $('#container1').hide();
+    $('#analysis').hide();
+    $('#analysisHeader').hide();
+    $('#analysisBtn').hide();
+
     $('#searching').show();
     var songName = "";
     var songIDs = [];
@@ -253,10 +258,10 @@
             $('#user-profile').hide();
             $('#searching').hide();
             $('#container1').hide();
-            $('#analysisHeader').hide();
-            $('#analysisBtn').hide();
             $('#resultsBtn').hide();
             $('#analysis').hide();
+            $('#analysisHeader').hide();
+            $('#analysisBtn').hide();
 
           }
       });
