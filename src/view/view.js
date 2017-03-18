@@ -171,6 +171,7 @@
 
           $('#results').show();
           $('#resultsBtn').show();
+          $('html, body').animate({scrollTop:$(document).height()}, 'slow');
           document.getElementById('resultsButton').addEventListener('click', function() {
             getStats(resultIDs, songNames);
           }, false);
@@ -178,7 +179,6 @@
       });
     }
     $('#searching').hide();
-    $('html, body').animate({scrollTop:$(resultsBtn).height()}, 'slow');
   }
 
   function searchSong(num, i, songIDs) {
@@ -256,6 +256,7 @@
             $('#analysisHeader').hide();
             $('#analysisBtn').hide();
             $('#resultsBtn').hide();
+            $('#analysis').hide();
 
           }
       });
