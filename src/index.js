@@ -166,11 +166,9 @@ app.get('/recs', function(req, res) {
 });
 
 app.get('/stats', function(req, res) {
-  console.log('getting stats');
   var access_token = req.query.access;
   var song = req.query.song;
   var key = req.query.key;
-  console.log(song);
   var url = 'https://api.spotify.com/v1/audio-features/' + song;
   var options = {
     url: url,
@@ -178,9 +176,7 @@ app.get('/stats', function(req, res) {
     json: true
   };
   request.get(options, function(error, response, body) {
-    console.log(body);
     if (!error && response.statusCode === 200) {
-      console.log('sending back');
       // Adjust stats to from 0-10
       res.send({
         'key': key,
