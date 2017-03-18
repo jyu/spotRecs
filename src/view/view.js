@@ -92,8 +92,8 @@
               song4V: stats4.v,
               song4T: stats4.t
             });
-            $(datatable).hide();
-            var chart  = Highcharts.chart('container1',{
+            $('#datatable').hide();
+            var chart  = Highcharts.chart('analysis',{
               data: {
                   table: 'datatable'
               },
@@ -116,6 +116,10 @@
                   }
               }
             });
+          $('#analysis').show();
+          $('#analysisHeader').show();
+          $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+
           }
         })
       }
@@ -160,15 +164,17 @@
             data.songs[2].name,
             data.songs[3].name
           ]
-          getStats(resultIDs, songNames);
+
           $('#results').show();
-          $('#song-data').show();
-          $('#container').show();
+          $('#resultsBtn').show();
+          document.getElementById('resultsButton').addEventListener('click', function() {
+            getStats(resultIDs, songNames);
+          }, false);
         }
       });
     }
     $('#searching').hide();
-    $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+    $('html, body').animate({scrollTop:$(resultsBtn).height()}, 'slow');
   }
 
   function searchSong(num, i, songIDs) {
@@ -242,7 +248,9 @@
             $('#loggedinSearch').show();
             $('#user-profile').hide();
             $('#searching').hide();
-            $('#container').hide();
+            $('#container1').hide();
+            $('#analysisHeader').hide();
+            $('#resultsBtn').hide();
 
           }
       });
