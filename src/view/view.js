@@ -118,7 +118,11 @@
             });
           $('#analysis').show();
           $('#analysisHeader').show();
+          $('#analysisBtn').show();
           $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+          document.getElementById('analysisButton').addEventListener('click', function() {
+            $('html, body').animate({scrollTop:$(document)}, 'slow');
+          }, false);
 
           }
         })
@@ -250,6 +254,7 @@
             $('#searching').hide();
             $('#container1').hide();
             $('#analysisHeader').hide();
+            $('#analysisBtn').hide();
             $('#resultsBtn').hide();
 
           }
