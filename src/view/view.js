@@ -101,7 +101,7 @@
                   type: 'column'
               },
               title: {
-                  text: 'Song Analysis'
+                  text: 'Attributes Chart'
               },
               yAxis: {
                   allowDecimals: false,
