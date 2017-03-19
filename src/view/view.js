@@ -119,7 +119,6 @@
             });
           $('#analysisHeader').show();
           $('#analysisBtn').show();
-
           $('html, body').animate({scrollTop:$(document).height()}, 'slow');
           document.getElementById('analysisButton').addEventListener('click', function() {
             $('html, body').animate({scrollTop:$(document)}, 'slow');
@@ -252,7 +251,6 @@
           },
           success: function(response) {
             userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-
             $('#login').hide();
             $('#loggedinSearch').show();
             $('#user-profile').hide();
@@ -261,7 +259,6 @@
             $('#analysis').hide();
             $('#analysisHeader').hide();
             $('#analysisBtn').hide();
-
           }
       });
     } else {
