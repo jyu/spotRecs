@@ -8,6 +8,13 @@
     font-size: 15px;
 }
 
+#link
+{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
 .text-overflow
 {
     overflow: hidden;
