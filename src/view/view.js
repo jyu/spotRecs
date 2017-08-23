@@ -1,5 +1,142 @@
 (function() {
+    function notify(el) {
+      console.log(el.innerHTML)
+         $.ajax({
+          url: 'https://api.spotify.com/v1/me/playlists',
+          headers: {
+            'Authorization': 'Bearer ' + access_token
+          },
+          success: function(response) {
+            // Get the Playlist
+            for (var i=0; i < response.items.length; i++) {
+              if (response.items[i].name == el.innerHTML) {
+                var pl = response.items[i]
+              }
+            }
+            console.log(pl)
+            console.log(pl.tracks.href)
+            // Get the tracks
+            var numRes = 0
+            var total = 0
+            var names = []
+            var ids = ""
+            var idList = []
+            $.ajax({
+              async: false,
+              url: pl.tracks.href,
+              headers: {
+                'Authorization': 'Bearer ' + access_token
+              },
+              success: function(response) {
+                numRes += response.items.length
+                total = response.total
+                for (var i=0; i < response.items.length; i++) {
+                  if (String(response.items[i].track.id) != "null") {
+                    names.push(response.items[i].track.name)
+                    ids += response.items[i].track.id + ","
+                  }
+                }
+                idList.push(ids.substring(0,ids.length-1));
+                ids = "";
+              }
+            });
 
+            while (numRes < total) {
+              $.ajax({
+                async: false,
+                url: pl.tracks.href + "?offset=" + String(numRes) + "&limit=100",
+                headers: {
+                  'Authorization': 'Bearer ' + access_token
+                },
+                success: function(response) {
+                  console.log(response)
+                  numRes += response.items.length
+                  for (var i=0; i < response.items.length; i++) {
+                    if (String(response.items[i].track.id) != "null") {
+                      names.push(response.items[i].track.name)
+                      ids += response.items[i].track.id + ","
+                    }
+                  }
+                  idList.push(ids.substring(0,ids.length-1));
+                  ids = "";
+                }
+              });
+            }
+            console.log(numRes)
+            console.log(names)
+            $.ajax({
+              url: '/analyze',
+              data: {
+                'names': names,
+                'songids':idList,
+                'access': access_token
+              }
+            }).done(function(data) {
+              console.log(data)
+              var series = []
+              for (var i=0; i < data.stats.length; i++) {
+                series.push({
+                  name: names[i],
+                  color: 'rgba(223, 83, 83, .5)',
+                  data: [data.stats[i]],
+                  showInLegend: false
+                })
+              }
+
+              Highcharts.chart('playlistAna', {
+              chart: {
+                  type: 'scatter',
+                  zoomType: 'xy'
+              },
+              title: {
+                  text: 'Songs from ' + el.innerHTML
+              },
+              subtitle: {
+                  text: 'Source: Spotify API'
+              },
+              xAxis: {
+                  visible: false,
+                  lineWidth: 0,
+                  title: {
+                      enabled: false,
+                      text: 'Height (cm)'
+                  }
+              },
+              yAxis: {
+                  visible: false,
+                  lineWidth: 0,
+                  title: {
+                      enabled: false,
+                      text: 'Weight (kg)'
+                  }
+              },
+              plotOptions: {
+                  scatter: {
+                      marker: {
+                          symbol: 'circle',
+                          radius: 5
+                      },
+                      states: {
+                          hover: {
+                              marker: {
+                                  enabled: false
+                              }
+                          }
+                      },
+                      tooltip: {
+                          headerFormat: '<b>{series.name}</b><br>'
+                      }
+                  }
+              },
+              series: series
+          });
+
+
+            })
+
+          }
+      });
+    }
   /**
    * Obtains parameters from the hash of the URL
    * @return Object
@@ -232,6 +369,10 @@
       dataTemplate = Handlebars.compile(dataSource),
       dataPlaceholder = document.getElementById('song-data');
 
+  var playlistSource = document.getElementById('playlist-template').innerHTML,
+      playlistTemplate = Handlebars.compile(playlistSource),
+      playlistPlaceholder = document.getElementById('playlist-list');
+
   var params = getHashParams();
 
   var access_token = params.access_token,
@@ -245,12 +386,21 @@
   } else {
     if (access_token) {
         $.ajax({
-          url: 'https://api.spotify.com/v1/me',
+          url: 'https://api.spotify.com/v1/me/playlists',
           headers: {
             'Authorization': 'Bearer ' + access_token
           },
           success: function(response) {
-            userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+            console.log(response)
+            // userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+            var playlist = []
+            for (var i=0; i < response.items.length; i++) {
+              playlist.push(response.items[i].name)
+            }
+            console.log(playlist)
+            playlistPlaceholder.innerHTML = playlistTemplate({playlist:playlist});
+            $('#playlist-list').show();
+
             $('#login').hide();
             $('#loggedinSearch').show();
             $('#user-profile').hide();
@@ -259,6 +409,11 @@
             $('#analysis').hide();
             $('#analysisHeader').hide();
             $('#analysisBtn').hide();
+            if (document.getElementById('playlists')) {
+              document.getElementById('playlists').addEventListener('click', function(event) {
+                notify(event.target);
+              });
+            }
           }
       });
     } else {
@@ -274,6 +429,12 @@
     document.getElementById('addRow').addEventListener('click', function() {
       addRowFn(num);
     }, false);
+
+    if (document.getElementById('playlists')) {
+      document.getElementById('playlists').addEventListener('click', function(event) {
+        notify(event.target);
+      });
+    }
   }
 })();
 

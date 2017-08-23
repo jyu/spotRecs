@@ -22,3 +22,6 @@
     white-space: nowrap;
     width: 500px;
 }
+.center {
+    text-align: center;
+}

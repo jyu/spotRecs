@@ -11,6 +11,7 @@ var cookieParser = require('cookie-parser');
 var client_id = 'd8c54aed95f045b991861e7d94b14f8f'; // Your client id
 var client_secret = '32acd5e02e934ec0b514a7b58ff1fa80'; // Your secret
 var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
+var TSNE = require('tsne-js');
 
 /**
  * Generates a random string containing numbers and letters
@@ -203,5 +204,83 @@ app.get('/stats', function(req, res) {
     }
   });
 });
+
+var processData = function(res, names, numRes, stats) {
+
+  if (numRes >= names.length) {
+    // res.send({
+    //   'stats': stats,
+    //   'names': names
+    // });
+    console.log(stats)
+    console.log(numRes)
+    var model = new TSNE({
+      dim: 2,
+      perplexity: 50.0,
+      earlyExaggeration: 4.0,
+      learningRate: 100.0,
+      nIter: 200,
+      metric: 'euclidean'
+    });
+
+    var inputData = stats
+    console.log("here")
+    // inputData is a nested array which can be converted into an ndarray
+    // alternatively, it can be an array of coordinates (second argument should be specified as 'sparse')
+    model.init({
+      data: inputData,
+      type: 'dense'
+    });
+    // `error`,  `iter`: final error and iteration number
+    // note: computation-heavy action happens here
+    var [error, iter] = model.run();
+    console.log("here")
+    // rerun without re-calculating pairwise distances, etc.
+    model.rerun();
+    console.log("here")
+
+    // `output` is unpacked ndarray (regular nested javascript array)
+    var output = model.getOutput();
+    console.log("here")
+
+    // `outputScaled` is `output` scaled to a range of [-1, 1]
+    var outputScaled = model.getOutputScaled();
+
+    console.log(outputScaled)
+    res.send({
+      'stats':outputScaled,
+      'names':names
+    });
+
+  }
+}
+
+app.get('/analyze', function(req, res) {
+  var access_token = req.query.access;
+  var songidList = req.query.songids;
+  var names = req.query.names;
+  var numRes = 0;
+  var stats = []
+  for (var i = 0; i < songidList.length; i++) {
+    console.log('start');
+    var url = 'https://api.spotify.com/v1/audio-features/?ids=' + songidList[i];
+    var options = {
+      url: url,
+      headers: { 'Authorization': 'Bearer ' + access_token },
+      json: true
+    };
+    request.get(options, function(error, response, body) {
+      for (var i = 0; i < body.audio_features.length; i++) {
+        var s = body.audio_features[i]
+        stats.push([s.danceability, s.energy, s.speechiness, s.acousticness, s.instrumentalness, s.valence, s.tempo/40])
+      }
+      numRes += body.audio_features.length;
+
+      processData(res, names, numRes, stats);
+    });
+  }
+  console.log(numRes)
+});
+
 
 app.listen(process.env.PORT || 3000);
