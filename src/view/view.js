@@ -1,5 +1,19 @@
 (function() {
     function notify(el) {
+      $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+
+      $('#visualizing').show();
+      $('#playlistAna').hide();
+      $('#login').hide();
+      $('#loggedinSearch').show();
+      $('#user-profile').hide();
+      $('#searching').hide();
+      $('#resultsBtn').hide();
+      $('#results').hide();
+      $('#analysis').hide();
+      $('#analysisHeader').hide();
+      $('#analysisBtn').hide();
+
       console.log(el.innerHTML)
          $.ajax({
           url: 'https://api.spotify.com/v1/me/playlists',
@@ -72,6 +86,11 @@
                 'access': access_token
               }
             }).done(function(data) {
+              $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+
+              $('#visualizing').hide();
+              $('#playlistAna').show();
+
               console.log(data)
               var series = []
               for (var i=0; i < data.stats.length; i++) {
@@ -309,13 +328,13 @@
           $('#results').show();
           $('#resultsBtn').show();
           $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+          $('#searching').hide();
           document.getElementById('resultsButton').addEventListener('click', function() {
             getStats(resultIDs, songNames);
           }, false);
         }
       });
     }
-    $('#searching').hide();
   }
 
   function searchSong(num, i, songIDs) {
@@ -346,6 +365,8 @@
     $('#analysis').hide();
     $('#analysisHeader').hide();
     $('#analysisBtn').hide();
+    $('#playlistAna').hide();
+    $('#visualizing').hide();
 
     $('#searching').show();
     var songName = "";
@@ -400,6 +421,8 @@
             console.log(playlist)
             playlistPlaceholder.innerHTML = playlistTemplate({playlist:playlist});
             $('#playlist-list').show();
+            $('#playlistAna').hide();
+            $('#visualizing').hide();
 
             $('#login').hide();
             $('#loggedinSearch').show();

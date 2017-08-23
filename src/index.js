@@ -234,19 +234,18 @@ var processData = function(res, names, numRes, stats) {
     // `error`,  `iter`: final error and iteration number
     // note: computation-heavy action happens here
     var [error, iter] = model.run();
-    console.log("here")
+    console.log("here");
     // rerun without re-calculating pairwise distances, etc.
     model.rerun();
-    console.log("here")
+    console.log("here");
 
     // `output` is unpacked ndarray (regular nested javascript array)
     var output = model.getOutput();
-    console.log("here")
-
+    console.log("here");
+    // console.log(output);
     // `outputScaled` is `output` scaled to a range of [-1, 1]
     var outputScaled = model.getOutputScaled();
-
-    console.log(outputScaled)
+    // console.log(outputScaled)
     res.send({
       'stats':outputScaled,
       'names':names
