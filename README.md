@@ -1,2 +1,4 @@
 # spotRecs   
-Recommendations for Spotify
+Recommendations and Playlist Visualizations with Spotify
+
+View more: https://jyu.github.io/spotrecs/
