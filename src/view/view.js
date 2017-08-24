@@ -4,6 +4,7 @@
 
       $('#visualizing').show();
       $('#playlistAna').hide();
+      $('#playlistAnaHeader').hide();
       $('#login').hide();
       $('#loggedinSearch').show();
       $('#user-profile').hide();
@@ -90,6 +91,7 @@
 
               $('#visualizing').hide();
               $('#playlistAna').show();
+              $('#playlistAnaHeader').show();
 
               console.log(data)
               var series = []
@@ -366,6 +368,7 @@
     $('#analysisHeader').hide();
     $('#analysisBtn').hide();
     $('#playlistAna').hide();
+    $('#playlistAnaHeader').hide();
     $('#visualizing').hide();
 
     $('#searching').show();
@@ -422,6 +425,7 @@
             playlistPlaceholder.innerHTML = playlistTemplate({playlist:playlist});
             $('#playlist-list').show();
             $('#playlistAna').hide();
+            $('#playlistAnaHeader').hide();
             $('#visualizing').hide();
 
             $('#login').hide();

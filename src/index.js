@@ -214,12 +214,17 @@ var processData = function(res, names, numRes, stats) {
     // });
     console.log(stats)
     console.log(numRes)
+    var iterations = 200
+    if (numRes >= 250) {
+      iterations = 100
+    }
+    console.log(iterations)
     var model = new TSNE({
       dim: 2,
       perplexity: 50.0,
       earlyExaggeration: 4.0,
       learningRate: 100.0,
-      nIter: 200,
+      nIter: iterations,
       metric: 'euclidean'
     });
 
@@ -244,10 +249,10 @@ var processData = function(res, names, numRes, stats) {
     console.log("here");
     // console.log(output);
     // `outputScaled` is `output` scaled to a range of [-1, 1]
-    var outputScaled = model.getOutputScaled();
+    // var outputScaled = model.getOutputScaled();
     // console.log(outputScaled)
     res.send({
-      'stats':outputScaled,
+      'stats':output,
       'names':names
     });
 
