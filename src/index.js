@@ -13,6 +13,10 @@ var client_secret = '32acd5e02e934ec0b514a7b58ff1fa80'; // Your secret
 var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
 var TSNE = require('tsne-js');
 
+var bodyParser = require('body-parser')
+
+
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -32,6 +36,11 @@ var stateKey = 'spotify_auth_state';
 
 var app = express();
 
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
+
 app.use(express.static(__dirname + '/view'))
    .use(cookieParser());
 
@@ -42,6 +51,7 @@ app.get('/login', function(req, res) {
 
   // your application requests authorization
   var scope = 'user-read-private user-read-email';
+  console.log(redirect_uri)
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -259,10 +269,11 @@ var processData = function(res, names, numRes, stats) {
   }
 }
 
-app.get('/analyze', function(req, res) {
-  var access_token = req.query.access;
-  var songidList = req.query.songids;
-  var names = req.query.names;
+app.post('/analyze', function(req, res) {
+
+  var access_token = req.body.access;
+  var songidList = req.body.songids;
+  var names = req.body.names;
   var numRes = 0;
   var stats = []
   for (var i = 0; i < songidList.length; i++) {

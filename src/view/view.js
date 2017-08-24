@@ -80,6 +80,7 @@
             console.log(numRes)
             console.log(names)
             $.ajax({
+              type: "POST",
               url: '/analyze',
               data: {
                 'names': names,
