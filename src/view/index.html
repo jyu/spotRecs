@@ -12,16 +12,22 @@
     </script>
 
     <title>SpotRecs</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="view.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
     <div class="container">
-      <div id="login">
-        <h1>SpotRecs: Recommendations with Spotify</h1> <br>
+      <div id="login" class="center">
+        <br>
+        <h1>SpotRecs:</h1>
+        <h1> Recommendations and Playlist Visualizations</h1> <br>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <br>
+        <br>
+        <br>
+        <img src="Capture.JPG" align = "middle" class="half">
       </div>
       <div id="loggedinSearch">
           <div id="link">
@@ -46,9 +52,29 @@
         <button class="btn btn-default" id="addRow">Add Song</button>
         <br>
         <div id="searching">
-          <h3>
+          <h2>
             Searching For Recommendations...
-          </h3>
+          </h2>
+        </div>
+        <div id="playlist-list">
+        </div>
+        <div id="visualizing" class = "center">
+          <br>
+          <br>
+          <h2>
+            Visualizing your playlist
+          </h2>
+          <br>
+          <div class="loader"></div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
         </div>
         <div id="results">
         </div>
@@ -56,6 +82,9 @@
           <button class="btn btn-default" id="resultsButton">Analyze Results</button>
         </div>
         <div id="user-profile">
+        </div>
+        <div id="playlistAnaHeader"> <h1>Playlist Visualization</h1></div>
+        <div id="playlistAna" style="width: 600px; height: 600px; margin: 0 auto">
         </div>
         <div id="song-data">
         </div>
@@ -171,6 +200,16 @@
             <dt>Country</dt><dd>{{country}}</dd>
           </dl>
         </div>
+      </div>
+    </script>
+
+    <script id="playlist-template" type="text/x-handlebars-template">
+      <h1>Select a Playlist to Visualize</h1>
+
+      <div class="list-group" id="playlists">
+        {{#each playlist}}
+          <button type="button" class="list-group-item">{{this}}</button>
+        {{/each}}
       </div>
     </script>
 
