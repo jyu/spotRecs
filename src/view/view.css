@@ -48,8 +48,14 @@
   100% { transform: rotate(360deg); }
 }
 
-
-
 .half {
     width: 50%;
+}
+
+#analysisButton {
+    margin-bottom: 10px;
+}
+
+#resultsButton {
+    margin-bottom: 10px;
 }

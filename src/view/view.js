@@ -87,6 +87,11 @@
               $('#visualizing').hide();
               $('#playlistAna').show();
               $('#playlistAnaHeader').show();
+              $('#analysisBtn').show();
+
+              document.getElementById('analysisButton').addEventListener('click', function() {
+                $('html, body').animate({scrollTop:$(document)}, 'slow');
+              }, false);
 
               var series = []
               for (var i=0; i < data.stats.length; i++) {
