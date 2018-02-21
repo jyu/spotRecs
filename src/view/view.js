@@ -114,7 +114,7 @@
                   text: 'Songs from ' + el.innerHTML
               },
               subtitle: {
-                  text: 'Source: Spotify API'
+                  text: 'Song points that are closer together are more similar.'
               },
               xAxis: {
                   visible: false,
@@ -149,6 +149,11 @@
                           headerFormat: '<b>{series.name}</b><br>'
                       }
                   }
+              },
+              tooltip: {
+                formatter: function() {
+                  return '<b>'+ this.series.name + '</b>';
+                }
               },
               series: series
           });
