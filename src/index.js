@@ -224,7 +224,10 @@ var processData = function(res, names, numRes, stats) {
     // });
     console.log(stats)
     console.log(numRes)
-    var iterations = 200
+    var iterations = 400
+    if (numRes >= 100) {
+      iterations = 200
+    }
     if (numRes >= 250) {
       iterations = 100
     }
