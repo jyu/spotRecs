@@ -10,7 +10,7 @@ var cookieParser = require('cookie-parser');
 
 var client_id = 'd8c54aed95f045b991861e7d94b14f8f'; // Your client id
 var client_secret = '32acd5e02e934ec0b514a7b58ff1fa80'; // Your secret
-var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
+var redirect_uri = 'https://spotrecs.herokuapp.com/callback'; // Your redirect uri
 var TSNE = require('tsne-js');
 
 var bodyParser = require('body-parser')
