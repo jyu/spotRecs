@@ -15,7 +15,6 @@
       $('#analysisHeader').hide();
       $('#analysisBtn').hide();
 
-      console.log(el.innerHTML)
          $.ajax({
           url: 'https://api.spotify.com/v1/me/playlists',
           headers: {
@@ -28,8 +27,6 @@
                 var pl = response.items[i]
               }
             }
-            console.log(pl)
-            console.log(pl.tracks.href)
             // Get the tracks
             var numRes = 0
             var total = 0
@@ -64,7 +61,6 @@
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                  console.log(response)
                   numRes += response.items.length
                   for (var i=0; i < response.items.length; i++) {
                     if (String(response.items[i].track.id) != "null") {
@@ -77,8 +73,6 @@
                 }
               });
             }
-            console.log(numRes)
-            console.log(names)
             $.ajax({
               type: "POST",
               url: '/analyze',
@@ -94,7 +88,6 @@
               $('#playlistAna').show();
               $('#playlistAnaHeader').show();
 
-              console.log(data)
               var series = []
               for (var i=0; i < data.stats.length; i++) {
                 series.push({
@@ -183,7 +176,6 @@
     var contentList = content.split(/\s*<br ?\/?>\s*/);
     var lastSong = contentList[contentList.length - 2];
     num = [parseInt(lastSong.charAt(lastSong.length - 2))];
-    console.log(num);
     return num;
   }
 
@@ -199,13 +191,10 @@
   }
 
   function getStats(songIDs, songNames) {
-    console.log('getting stats');
     if(typeof songIDs != 'undefined' && songIDs.length != 0) {
       var statistics = [0,0,0,0];
       var count = 0;
       for (var i=0; i < songIDs.length; i++) {
-        console.log(count);
-        console.log('song ' + i);
         var song = songIDs[i];
         $.ajax({
           url: '/stats',
@@ -216,14 +205,10 @@
           }
         }).done(function(data) {
           if (data.key != 'error') {
-            console.log(statistics);
-            console.log(data.stats.key);
             statistics.splice(data.stats.key,1,data.stats);
-            console.log(statistics[i]);
             count += 1;
           }
           if (count == 4) {
-            console.log('Analysis done');
 
             var stats1 = statistics[0];
             var stats2 = statistics[1];
@@ -304,7 +289,6 @@
         }
       }).done(function(data) {
         if (data.songs != 'error') {
-          console.log(data.songs.length);
           resultsPlaceholder.innerHTML = resultsTemplate(
           {
             song1: data.songs[0].name,
@@ -347,7 +331,6 @@
 
   function searchSong(num, i, songIDs) {
     songName = "song" + i;
-    console.log(songName);
     var song = document.getElementById(songName).value;
     $.ajax({
       url: '/search',
@@ -359,11 +342,9 @@
       if (data.song == 'error') {
         num[0] -= 1;
       } else {
-        console.log(data.preview);
         songIDs.push(data.song.id);
       }
       if (songIDs.length == num[0]) {
-        console.log('searching complete!');
         getRecs(songIDs);
       }
     });
@@ -381,7 +362,6 @@
     var songName = "";
     var songIDs = [];
     num = updateNum(num);
-    console.log(songIDs);
     for (var i=1; i < num[0]+1; i++) {
       searchSong(num, i, songIDs);
     }
@@ -421,13 +401,11 @@
             'Authorization': 'Bearer ' + access_token
           },
           success: function(response) {
-            console.log(response)
             // userProfilePlaceholder.innerHTML = userProfileTemplate(response);
             var playlist = []
             for (var i=0; i < response.items.length; i++) {
               playlist.push(response.items[i].name)
             }
-            console.log(playlist)
             playlistPlaceholder.innerHTML = playlistTemplate({playlist:playlist});
             $('#playlist-list').show();
             $('#playlistAna').hide();
