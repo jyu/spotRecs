@@ -165,6 +165,17 @@ app.get('/recs', function(req, res) {
   request.get(options, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       var songs = body.tracks;
+      var count = 0;
+      var j = 0;
+      // Remove songs with no links
+      while (count < 5 && j < songs.length && (5 - count) < (songs.length - j)) {
+        if (songs[j].preview_url == null) {
+          songs.splice(j, 1)
+        } else {
+          count += 1;
+          j += 1;
+        }
+      }
       res.send({
         'songs': songs
       });
