@@ -230,6 +230,8 @@ var processData = function(res, names, numRes, stats) {
     }
     if (numRes >= 250) {
       iterations = 100
+      stats = stats.slice(0,200)
+      names = names.slice(0,200)
     }
     console.log(iterations)
     var model = new TSNE({
