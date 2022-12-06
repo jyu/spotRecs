@@ -4,9 +4,9 @@
   "description": "gets songs based on input songs",
   "main": "index.js",
   "dependencies": {
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
+    "express": "^4.18.2",
     "querystring": "^0.2.0",
     "request": "^2.83.0",
     "tsne-js": "^1.0.3"
